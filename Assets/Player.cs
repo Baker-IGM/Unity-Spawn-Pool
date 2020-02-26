@@ -8,22 +8,29 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     RectTransform rect;
+    [SerializeField]
+    Vector2 position;
     
     const string k_FIRE_AXIS = "Fire1";
 
     [SerializeField]
     float fireCoolDown;
     float fireTimer;
-
+    
     Transform NewBullet;
 
+    [SerializeField]
+    Vector2 lookAtVect;
+
+    #region Movement
     [SerializeField]
     float moveScalar = 1;
     [SerializeField]
     Vector2 moveDelta;
+    #endregion
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         rect = GetComponent<RectTransform>();
 	}
@@ -45,10 +52,16 @@ public class Player : MonoBehaviour
         //      }
         #endregion
 
-        //Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //transform.rotation = Quaternion.LookRotation(mouseWorldPos, -Vector3.forward);
-
+        //
+        //      Player movement
+        //
         rect.anchoredPosition += moveDelta;
+        position = rect.anchoredPosition;
+
+        //
+        //      Rotate to aim at the pointer
+        //
+        rect.LookAt(Camera.main.ScreenToWorldPoint(lookAtVect));
     }
 
     public void OnMove(InputValue value)
@@ -58,7 +71,10 @@ public class Player : MonoBehaviour
         moveDelta *= moveScalar;
 
         rect.anchoredPosition += moveDelta;
+    }
 
-        //transform.Translate()
+    public void OnLook(InputValue value)
+    {
+        lookAtVect = value.Get<Vector2>();
     }
 }

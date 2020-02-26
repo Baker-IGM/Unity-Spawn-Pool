@@ -529,16 +529,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 71061679}
     m_Modifications:
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: moveAction.m_Id
-      value: 591f35c3-14ad-46af-9143-c3ba2028d302
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: moveAction.m_Name
-      value: Move
-      objectReference: {fileID: 0}
     - target: {fileID: 749250151834923539, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
         type: 3}
       propertyPath: m_LocalPosition.x

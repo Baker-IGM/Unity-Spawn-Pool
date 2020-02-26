@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect: {fileID: 0}
   fireCoolDown: 0.1
-  moveScalar: 1
+  moveScalar: 10
   moveDelta: {x: 0, y: 0}
 --- !u!114 &8841470011214395405
 MonoBehaviour:
