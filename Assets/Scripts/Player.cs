@@ -1,26 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
+[RequireComponent(typeof(LookAt))]
 public class Player : MonoBehaviour
 {
-    RectTransform rect, parentRect;
+    RectTransform rect;
 
-    #region Look at vars
     [SerializeField]
     Vector2 position;
+    public Vector2 Position
+    {
+        get
+        {
+            return position;
+        }
+    }
 
-    [SerializeField]
-    float angle;
+    #region Look at vars
+    LookAt lookAtScript;
 
-    [SerializeField]
     Vector2 lookAtVect;
-
-    [SerializeField]
-    Vector2 lookAtDelta;
     #endregion
 
     #region Firing vars
@@ -45,9 +45,7 @@ public class Player : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
 
-        parentRect = transform.parent.GetComponent<RectTransform>();
-
-        //MovePlayer(parentRect.rect.size / 2f);
+        lookAtScript = GetComponent<LookAt>();
 	}
 	
 	// Update is called once per frame
@@ -71,47 +69,6 @@ public class Player : MonoBehaviour
         //      Player movement
         //
         MovePlayer(moveDelta);
-
-        //
-        //      Rotate to aim at the pointer
-        //
-        lookAtDelta = position - lookAtVect;
-
-        
-
-        if (lookAtDelta.y < 0)
-        {
-            //      1
-            if(lookAtDelta.x < 0)
-            {
-                angle = Mathf.Atan(lookAtDelta.y / lookAtDelta.x);
-            }
-            //      2
-            else
-            {
-                angle = Mathf.Atan(lookAtDelta.y / lookAtDelta.x) + Mathf.PI;
-            }
-        }
-        else
-        {
-            //      3
-            if (lookAtDelta.x >= 0)
-            {
-                angle = Mathf.Atan(lookAtDelta.y / lookAtDelta.x) + Mathf.PI;
-            }
-            //      4
-            else
-            {
-                angle = Mathf.Atan(lookAtDelta.y / lookAtDelta.x) + (Mathf.PI * 2f);
-            }
-        }
-
-        if (!float.IsNaN(angle))
-        {
-            angle *= Mathf.Rad2Deg;
-
-            transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
-        }
     }
 
     #region Movment Logic
@@ -134,6 +91,8 @@ public class Player : MonoBehaviour
 
     public void OnLook(InputValue value)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, value.Get<Vector2>(), Camera.main, out lookAtVect);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(MenuManager.Instance.MainGameRect, value.Get<Vector2>(), Camera.main, out lookAtVect);
+
+        lookAtScript.TargetPosition = lookAtVect;
     }
 }
