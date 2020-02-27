@@ -26,7 +26,7 @@ public class BulletManager : Singleton<BulletManager>
     void CreateBullet()
     {
         GameObject newBullet = Instantiate(bulletPrefab, transform, false);
-        newBullet.transform.localPosition = Vector3.zero;
+        //newBullet.transform.localPosition = Vector3.zero;
         newBullet.transform.rotation = Quaternion.identity;
         newBullet.transform.localScale = Vector3.one;
 
@@ -54,6 +54,8 @@ public class BulletManager : Singleton<BulletManager>
 
     public void ReturnBullet(Transform bulletTransform)
     {
+        bulletTransform.SetParent(transform, false);
+
         bulletTransform.gameObject.SetActive(false);
 
         transform.SetAsLastSibling();

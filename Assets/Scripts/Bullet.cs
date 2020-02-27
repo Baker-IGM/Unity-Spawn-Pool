@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent (typeof(RectTransform))]
 public class Bullet : MonoBehaviour
 {
+    RectTransform rect;
+
     Rigidbody2D rBody;
 
     [SerializeField]
@@ -16,28 +19,32 @@ public class Bullet : MonoBehaviour
         rBody = GetComponent<Rigidbody2D>();
 
         speedVect = new Vector2(speed, 0);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+        rect = GetComponent<RectTransform>();
+    }
+    void Start()
     {
-		
+        
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (MenuManager.Instance.MainGameRect.rect.Contains(rect.rect.position))
+        {
+            if (!BulletManager.IsShuttingDown())
+                BulletManager.Instance.ReturnBullet(transform);
+        }
 	}
 
     public void Fire(Vector2 position, Quaternion direction)
     {
-        transform.position = position;
+        rect.anchoredPosition = position;
 
-        transform.rotation = direction;
+        rect.rotation = direction;
 
         gameObject.SetActive(true);
 
         rBody.AddForce(speedVect, ForceMode2D.Impulse);
-    }
-
-    private void OnBecameInvisible()
-    {
-        if(!BulletManager.IsShuttingDown())
-            BulletManager.Instance.ReturnBullet(transform);
     }
 }

@@ -95,4 +95,13 @@ public class Player : MonoBehaviour
 
         lookAtScript.TargetPosition = lookAtVect;
     }
+
+    public void OnFire()
+    {
+        Bullet bullet = BulletManager.Instance.GetBullet();
+
+        bullet.transform.SetParent(MenuManager.Instance.MainGameRect);
+
+        bullet.Fire(position, rect.rotation);
+    }
 }
