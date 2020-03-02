@@ -44,10 +44,10 @@ public class Bullet : RectGameObject
         //  Check what layer the bullet is
         switch(gameObject.layer)
         {
-            case (int)Layers.Enemy:
+            case (int)BulletLayers.EnemyBullet:
                 GameManager.Instance.ResetScore();
                 break;
-            case (int)Layers.Player:
+            case (int)BulletLayers.PlayerBullet:
                 GameManager.Instance.AddPoints(1);
                 break;
         }

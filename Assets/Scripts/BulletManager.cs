@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+enum BulletLayers
+{
+    PlayerBullet = 10,
+    EnemyBullet = 11
+}
 public class BulletManager : Singleton<BulletManager>
 {
     [SerializeField]

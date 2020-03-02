@@ -396,8 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bfb80b23ecc3640b4986fa266f81e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 95185923}
   mainGameRect: {fileID: 71061679}
+  scoreLabel: {fileID: 1855679726}
 --- !u!114 &95185926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1464716893}
+  score: 0
 --- !u!1 &462588962
 GameObject:
   m_ObjectHideFlags: 0

@@ -111,7 +111,7 @@ public class Player : RectGameObject
     {
         NewBullet = BulletManager.Instance.GetBullet();
 
-        NewBullet.gameObject.layer = (int)Layers.Player;
+        NewBullet.gameObject.layer = (int)BulletLayers.PlayerBullet;
 
         NewBullet.transform.SetParent(MenuManager.Instance.MainGameRect);
 
