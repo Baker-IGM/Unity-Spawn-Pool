@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : Singleton<MenuManager>
 {
     [SerializeField]
-    Canvas canvas;
+    RectTransform mainGameRect;
 
     [SerializeField]
-    RectTransform mainGameRect;
+    TMP_Text scoreLabel;
 
     public RectTransform MainGameRect
     {
@@ -25,8 +26,8 @@ public class MenuManager : Singleton<MenuManager>
         
     }
 
-    public Vector2 GetCanvasScale()
+    private void Update()
     {
-        return canvas.pixelRect.size;
+        scoreLabel.text = GameManager.Instance.Score.ToString();
     }
 }
