@@ -499,7 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8249299772027261155, guid: c767ac315ad24ba4aaade53dc54832f5,
     type: 3}
-  startingBulletCount: 1
+  startingBulletCount: 100
 --- !u!1001 &906273207
 PrefabInstance:
   m_ObjectHideFlags: 0

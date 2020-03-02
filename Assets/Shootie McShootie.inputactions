@@ -27,7 +27,7 @@
                     "id": "f5918c60-88db-4691-b1a0-6886ffe7a322",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [

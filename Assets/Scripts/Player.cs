@@ -11,13 +11,14 @@ public class Player : RectGameObject
     #endregion
 
     #region Firing vars
-    const string k_FIRE_AXIS = "Fire1";
+    [SerializeField]
+    bool isFiring = false;
 
     [SerializeField]
     float fireCoolDown;
     float fireTimer;
     
-    Transform NewBullet;
+    Bullet NewBullet;
     #endregion
 
     #region Movement vars
@@ -39,17 +40,17 @@ public class Player : RectGameObject
 	void Update ()
     {
         #region Firing
-        //      if (fireTimer > 0)
-        //      {
-        //          fireTimer -= Time.deltaTime;
-        //      }
+        if (fireTimer > 0)
+        {
+            fireTimer -= Time.deltaTime;
+        }
 
-        //if(fireTimer <= 0 && Input.GetAxis(k_FIRE_AXIS) > 0)
-        //      {
-        //          BulletManager.Instance.GetBullet().Fire(transform.position, transform.rotation);
+        if (isFiring && fireTimer < 0)
+        {
+            Fire();
 
-        //          fireTimer = fireCoolDown;
-        //      }
+            fireTimer = fireCoolDown;
+        }
         #endregion
 
         //
@@ -83,12 +84,28 @@ public class Player : RectGameObject
         lookAtScript.TargetPosition = lookAtVect;
     }
 
-    public void OnFire()
+    public void OnFire(InputValue value)
     {
-        Bullet bullet = BulletManager.Instance.GetBullet();
+        isFiring = value.isPressed;
 
-        bullet.transform.SetParent(MenuManager.Instance.MainGameRect);
+        if (isFiring)
+        {
+            Fire();
 
-        bullet.Fire(position, rect.rotation);
+            fireTimer = fireCoolDown;
+        }
+        else
+        {
+            fireTimer = 0;
+        }
+    }
+
+    void Fire()
+    {
+        NewBullet = BulletManager.Instance.GetBullet();
+
+        NewBullet.transform.SetParent(MenuManager.Instance.MainGameRect);
+
+        NewBullet.Fire(position, rect.rotation);
     }
 }
