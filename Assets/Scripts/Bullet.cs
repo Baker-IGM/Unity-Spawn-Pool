@@ -1,25 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody2D))]
-[RequireComponent (typeof(RectTransform))]
-public class Bullet : MonoBehaviour
+public class Bullet : RectGameObject
 {
-    RectTransform rect;
-
     Rigidbody2D rBody;
 
     [SerializeField]
     float speed;
 
 	// Use this for initialization
-	void Awake () {
+    protected override void Awake()
+    {
+        base.Awake();
+
         rBody = GetComponent<Rigidbody2D>();
 
         rect = GetComponent<RectTransform>();
-    }
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

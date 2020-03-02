@@ -1,22 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(LookAt))]
-public class Player : MonoBehaviour
+public class Player : RectGameObject
 {
-    RectTransform rect;
-
-    [SerializeField]
-    Vector2 position;
-    public Vector2 Position
-    {
-        get
-        {
-            return position;
-        }
-    }
-
     #region Look at vars
     LookAt lookAtScript;
 
@@ -41,12 +28,12 @@ public class Player : MonoBehaviour
     #endregion
 
     // Use this for initialization
-    void Start ()
+    protected override void Awake()
     {
-        rect = GetComponent<RectTransform>();
+        base.Awake();
 
         lookAtScript = GetComponent<LookAt>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()

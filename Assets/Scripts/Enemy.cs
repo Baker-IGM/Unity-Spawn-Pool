@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(LookAt))]
-public class Enemy : MonoBehaviour
+public class Enemy : RectGameObject
 {
     LookAt lookAtScript;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         lookAtScript = GetComponent<LookAt>();
     }
 
