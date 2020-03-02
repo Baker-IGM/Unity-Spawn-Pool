@@ -623,7 +623,7 @@ PrefabInstance:
     - target: {fileID: 6903689974909900049, guid: 274e86b58052a0646968f1f5c79b5c8d,
         type: 3}
       propertyPath: fireCoolDown
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274e86b58052a0646968f1f5c79b5c8d, type: 3}

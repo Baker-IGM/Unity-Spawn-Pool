@@ -1,7 +1,7 @@
 {
 "companyName": "Sage Nomad",
 "productName": "Shootie McShootie",
-"productVersion": "1.0",
+"productVersion": "1.1",
 "dataUrl": "docs.data.unityweb",
 "wasmCodeUrl": "docs.wasm.code.unityweb",
 "wasmFrameworkUrl": "docs.wasm.framework.unityweb",
