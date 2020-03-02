@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(RectTransform))]
@@ -12,13 +10,10 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     float speed;
-    Vector2 speedVect;
 
 	// Use this for initialization
 	void Awake () {
         rBody = GetComponent<Rigidbody2D>();
-
-        speedVect = new Vector2(speed, 0);
 
         rect = GetComponent<RectTransform>();
     }
@@ -45,6 +40,6 @@ public class Bullet : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        rBody.AddForce(speedVect, ForceMode2D.Impulse);
+        rBody.AddForce(rect.up * speed, ForceMode2D.Impulse);
     }
 }
