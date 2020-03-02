@@ -11,7 +11,6 @@ public class Player : RectGameObject
     #endregion
 
     #region Firing vars
-    [SerializeField]
     bool isFiring = false;
 
     [SerializeField]
@@ -40,17 +39,24 @@ public class Player : RectGameObject
 	void Update ()
     {
         #region Firing
-        if (fireTimer > 0)
+        //  Check if fire button is held down
+        if(isFiring)
         {
-            fireTimer -= Time.deltaTime;
-        }
+            //  Decrease auto fire timer
+            if (fireTimer > 0)
+            {
+                fireTimer -= Time.deltaTime;
+            }
 
-        if (isFiring && fireTimer < 0)
-        {
-            Fire();
+            //  Check if can refire
+            if (fireTimer < 0)
+            {
+                Fire();
 
-            fireTimer = fireCoolDown;
+                fireTimer = fireCoolDown;
+            }
         }
+        
         #endregion
 
         //
@@ -84,6 +90,7 @@ public class Player : RectGameObject
         lookAtScript.TargetPosition = lookAtVect;
     }
 
+    #region Fire Logic
     public void OnFire(InputValue value)
     {
         isFiring = value.isPressed;
@@ -104,8 +111,11 @@ public class Player : RectGameObject
     {
         NewBullet = BulletManager.Instance.GetBullet();
 
+        NewBullet.gameObject.layer = (int)Layers.Player;
+
         NewBullet.transform.SetParent(MenuManager.Instance.MainGameRect);
 
         NewBullet.Fire(position, rect.rotation);
     }
+    #endregion
 }

@@ -89,9 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2207c2eff12434ca010d0c8226dfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect: {fileID: 0}
-  position: {x: 0, y: 0}
-  isFiring: 0
   fireCoolDown: 0.15
   moveScalar: 10
 --- !u!114 &8841470011214395405

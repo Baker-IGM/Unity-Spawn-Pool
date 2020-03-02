@@ -3,10 +3,8 @@
 [RequireComponent(typeof(RectTransform))]
 public class RectGameObject : MonoBehaviour
 {
-    [SerializeField]
     protected RectTransform rect;
 
-    [SerializeField]
     protected Vector2 position;
     public Vector2 Position
     {

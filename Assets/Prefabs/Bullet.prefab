@@ -126,4 +126,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  speedVect: {x: 0, y: 0}
