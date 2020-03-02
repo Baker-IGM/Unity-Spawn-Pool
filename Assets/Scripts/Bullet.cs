@@ -21,7 +21,7 @@ public class Bullet : RectGameObject
     // Update is called once per frame
     void Update ()
     {
-        if (MenuManager.Instance.MainGameRect.rect.Contains(rect.rect.position))
+        if (!IsWithinBounds(rect.anchoredPosition))
         {
             if (!BulletManager.IsShuttingDown())
                 BulletManager.Instance.ReturnBullet(transform);
@@ -30,7 +30,7 @@ public class Bullet : RectGameObject
 
     public void Fire(Vector2 position, Quaternion direction)
     {
-        rect.anchoredPosition = position;
+        rect.anchoredPosition3D = new Vector3(position.x, position.y, 0);
 
         rect.rotation = direction;
 
@@ -51,5 +51,18 @@ public class Bullet : RectGameObject
                 GameManager.Instance.AddPoints(1);
                 break;
         }
+    }
+
+    bool IsWithinBounds(Vector2 pos)
+    {
+        if (pos.x - rect.rect.width / 2f > MenuManager.Instance.MainGameRect.rect.width / 2f ||
+            pos.x + rect.rect.width / 2f < MenuManager.Instance.MainGameRect.rect.width / -2f ||
+            pos.y - rect.rect.height / 2f > MenuManager.Instance.MainGameRect.rect.height / 2f ||
+            pos.y + rect.rect.height / 2f < MenuManager.Instance.MainGameRect.rect.height / -2f)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
