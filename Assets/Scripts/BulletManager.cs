@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-enum BulletLayers
+public enum BulletType
 {
     PlayerBullet = 10,
     EnemyBullet = 11
@@ -12,8 +12,12 @@ public class BulletManager : Singleton<BulletManager>
 
     [SerializeField]
     int startingBulletCount;
-
     int count;
+
+    [SerializeField]
+    Color PlayerBulletColor;
+    [SerializeField]
+    Color EnemyBulletColor;
 
     const string k_BULLET_NAME = "Bullet_{0:d4}";
 
@@ -57,15 +61,30 @@ public class BulletManager : Singleton<BulletManager>
         return selectedBullet.GetComponent<Bullet>();
     }
 
-    public void ReturnBullet(Transform bulletTransform)
+    public void ReturnBullet(Bullet bullet)
     {
         //  Set to default layer
-        bulletTransform.gameObject.layer = 0;
+        bullet.gameObject.layer = 0;
 
-        bulletTransform.SetParent(transform, false);
+        bullet.SetColor(Color.white);
 
-        bulletTransform.gameObject.SetActive(false);
+        bullet.transform.SetParent(transform, false);
 
-        transform.SetAsLastSibling();
+        bullet.gameObject.SetActive(false);
+
+        bullet.transform.SetAsLastSibling();
+    }
+
+    public Color GetColor(BulletType type)
+    {
+        switch(type)
+        {
+            case BulletType.EnemyBullet:
+                return EnemyBulletColor;
+            case BulletType.PlayerBullet:
+                return PlayerBulletColor;
+            default:
+                return Color.white;
+        }
     }
 }

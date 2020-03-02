@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent (typeof(Image))]
 public class Bullet : RectGameObject
 {
     Rigidbody2D rBody;
 
     [SerializeField]
     float speed;
+
+    Image sprite;
 
 	// Use this for initialization
     protected override void Awake()
@@ -16,6 +20,8 @@ public class Bullet : RectGameObject
         rBody = GetComponent<Rigidbody2D>();
 
         rect = GetComponent<RectTransform>();
+
+        sprite = GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -24,7 +30,9 @@ public class Bullet : RectGameObject
         if (!IsWithinBounds(rect.anchoredPosition))
         {
             if (!BulletManager.IsShuttingDown())
-                BulletManager.Instance.ReturnBullet(transform);
+            {
+                BulletManager.Instance.ReturnBullet(this);
+            }
         }
 	}
 
@@ -33,6 +41,8 @@ public class Bullet : RectGameObject
         rect.anchoredPosition3D = new Vector3(position.x, position.y, 0);
 
         rect.rotation = direction;
+
+        SetColor(BulletManager.Instance.GetColor((BulletType)gameObject.layer));
 
         gameObject.SetActive(true);
 
@@ -44,10 +54,10 @@ public class Bullet : RectGameObject
         //  Check what layer the bullet is
         switch(gameObject.layer)
         {
-            case (int)BulletLayers.EnemyBullet:
+            case (int)BulletType.EnemyBullet:
                 GameManager.Instance.ResetScore();
                 break;
-            case (int)BulletLayers.PlayerBullet:
+            case (int)BulletType.PlayerBullet:
                 GameManager.Instance.AddPoints(1);
                 break;
         }
@@ -64,5 +74,10 @@ public class Bullet : RectGameObject
         }
 
         return true;
+    }
+
+    public void SetColor(Color color)
+    {
+        sprite.color = color;
     }
 }

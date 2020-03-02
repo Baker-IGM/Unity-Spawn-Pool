@@ -54,7 +54,7 @@ public class Enemy : RectGameObject
     {
         NewBullet = BulletManager.Instance.GetBullet();
 
-        NewBullet.gameObject.layer = (int)BulletLayers.EnemyBullet;
+        NewBullet.gameObject.layer = (int)BulletType.EnemyBullet;
 
         NewBullet.transform.SetParent(MenuManager.Instance.MainGameRect);
 
