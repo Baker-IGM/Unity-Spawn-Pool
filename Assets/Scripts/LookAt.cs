@@ -5,7 +5,6 @@ public class LookAt : MonoBehaviour
 {
     RectTransform rect;
 
-    [SerializeField]
     Vector2 targetPosition;
 
     public Vector2 TargetPosition
@@ -16,7 +15,6 @@ public class LookAt : MonoBehaviour
         }
     }
 
-    [SerializeField]
     Vector2 position;
 
     public Vector2 Position
@@ -27,10 +25,8 @@ public class LookAt : MonoBehaviour
         }
     }
 
-    [SerializeField]
     float angle;
 
-    [SerializeField]
     Vector2 lookAtDelta;
 
     // Start is called before the first frame update
