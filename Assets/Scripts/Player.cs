@@ -77,9 +77,41 @@ public class Player : RectGameObject
 
     void MovePlayer(Vector2 delta)
     {
-        rect.anchoredPosition += delta;
+        //  Check if player would move outside the bounds
+        Vector2 newPos = ClampMoveToBounds(rect.anchoredPosition + delta);
+
+        rect.anchoredPosition = newPos;
 
         position = rect.anchoredPosition;
+    }
+
+    Vector2 ClampMoveToBounds(Vector2 pos)
+    {
+        //  Check Right
+        if(pos.x + rect.rect.width / 2f > MenuManager.Instance.MainGameRect.rect.width / 2f)
+        {
+            pos.x = (MenuManager.Instance.MainGameRect.rect.width / 2f) - (rect.rect.width / 2f);
+        }
+
+        //  Check Left
+        if (pos.x - rect.rect.width / 2f < MenuManager.Instance.MainGameRect.rect.width / -2f)
+        {
+            pos.x = (MenuManager.Instance.MainGameRect.rect.width / -2f) + (rect.rect.width / 2f);
+        }
+
+        //  Check Top
+        if (pos.y + rect.rect.height / 2f > MenuManager.Instance.MainGameRect.rect.height / 2f)
+        {
+            pos.y = (MenuManager.Instance.MainGameRect.rect.height / 2f) - (rect.rect.height / 2f);
+        }
+
+        //  Check Bottom
+        if (pos.y - rect.rect.height / 2f < MenuManager.Instance.MainGameRect.rect.height / -2f)
+        {
+            pos.y = (MenuManager.Instance.MainGameRect.rect.height / -2f) + (rect.rect.height / 2f);
+        }
+
+        return pos;
     }
     #endregion
 
