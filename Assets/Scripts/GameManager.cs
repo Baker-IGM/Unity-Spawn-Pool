@@ -1,6 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+enum Layers
+{
+    Player = 8,
+    Enemy = 10
+}
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]

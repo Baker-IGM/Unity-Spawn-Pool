@@ -54,6 +54,9 @@ public class BulletManager : Singleton<BulletManager>
 
     public void ReturnBullet(Transform bulletTransform)
     {
+        //  Set to default layer
+        bulletTransform.gameObject.layer = 0;
+
         bulletTransform.SetParent(transform, false);
 
         bulletTransform.gameObject.SetActive(false);

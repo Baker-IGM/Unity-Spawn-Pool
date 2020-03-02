@@ -38,4 +38,18 @@ public class Bullet : RectGameObject
 
         rBody.AddForce(rect.up * speed, ForceMode2D.Impulse);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //  Check what layer the bullet is
+        switch(gameObject.layer)
+        {
+            case (int)Layers.Enemy:
+                GameManager.Instance.ResetScore();
+                break;
+            case (int)Layers.Player:
+                GameManager.Instance.AddPoints(1);
+                break;
+        }
+    }
 }
