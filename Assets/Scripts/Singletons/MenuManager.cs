@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
-public class MenuManager : Singleton<MenuManager>
+public class MenuManager : Singleton<MenuManager>, ShootieMcShootie.IUIActions
 {
     [SerializeField]
     RectTransform mainGameRect;
@@ -26,7 +27,7 @@ public class MenuManager : Singleton<MenuManager>
 
     private void Awake()
     {
-        
+        InputManager.Instance.SetCallbacksForUI(this);
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public class MenuManager : Singleton<MenuManager>
         scoreLabel.text = GameManager.Instance.Score.ToString();
     }
 
-    void OnDebug()
+    public void OnDebug(InputAction.CallbackContext context)
     {
         debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
     }

@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(LookAt))]
 public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 {
-    [SerializeField]
-    ShootieMcShootie controls;
-
     #region Look at vars
     LookAt lookAtScript;
 
@@ -37,14 +35,7 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 
         lookAtScript = GetComponent<LookAt>();
 
-        if(controls == null)
-        {
-            controls = new ShootieMcShootie();
-
-            controls.Player.SetCallbacks(this);
-        }
-
-        controls.Player.Enable();
+        InputManager.Instance.SetCallbacksForPlayer(this);
     }
 	
 	// Update is called once per frame
@@ -78,9 +69,9 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
     }
 
     #region Movment Logic
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        moveDelta = value.Get<Vector2>();
+        moveDelta = context.ReadValue<Vector2>();
 
         moveDelta *= moveScalar;
 
@@ -135,9 +126,9 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
     }
 
     #region Fire Logic
-    /*public void OnFire(InputValue value)
+    public void OnFire(InputAction.CallbackContext context)
     {
-        isFiring = value.isPressed;
+        isFiring = context.control.IsPressed();
 
         if (isFiring)
         {
@@ -149,7 +140,7 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         {
             fireTimer = 0;
         }
-    }*/
+    }
 
     void Fire()
     {
@@ -162,32 +153,4 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         NewBullet.Fire(position, rect.rotation);
     }
     #endregion
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnDebug(InputAction.CallbackContext context)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-
-
-    public void OnFire(InputAction.CallbackContext context)
-    {
-        //isFiring = context.control value.isPressed;
-
-        if (isFiring)
-        {
-            Fire();
-
-            fireTimer = fireCoolDown;
-        }
-        else
-        {
-            fireTimer = 0;
-        }
-    }
 }
