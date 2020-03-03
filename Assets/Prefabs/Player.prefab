@@ -184,7 +184,7 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b9a51e66-e899-4ca7-9195-e3617eda19f9
     m_ActionName: UI/TrackedDeviceSelect
-  m_NeverAutoSwitchControlSchemes: 1
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
@@ -201,10 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553675126ad17244d9c5c53b2a4a642a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
-  position: {x: 0, y: 0}
-  angle: 0
-  lookAtDelta: {x: 0, y: 0}
 --- !u!58 &1464716892
 CircleCollider2D:
   m_ObjectHideFlags: 0
