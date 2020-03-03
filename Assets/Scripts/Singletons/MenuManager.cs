@@ -10,6 +10,9 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField]
     TMP_Text scoreLabel;
 
+    [SerializeField]
+    RectTransform debugPanel;
+
     public RectTransform MainGameRect
     {
         get
@@ -29,5 +32,10 @@ public class MenuManager : Singleton<MenuManager>
     private void Update()
     {
         scoreLabel.text = GameManager.Instance.Score.ToString();
+    }
+
+    void OnDebug()
+    {
+        debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
     }
 }

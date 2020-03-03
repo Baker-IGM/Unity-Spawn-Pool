@@ -2,8 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(LookAt))]
-public class Player : RectGameObject
+public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 {
+    [SerializeField]
+    ShootieMcShootie controls;
+
     #region Look at vars
     LookAt lookAtScript;
 
@@ -33,6 +36,15 @@ public class Player : RectGameObject
         base.Awake();
 
         lookAtScript = GetComponent<LookAt>();
+
+        if(controls == null)
+        {
+            controls = new ShootieMcShootie();
+
+            controls.Player.SetCallbacks(this);
+        }
+
+        controls.Player.Enable();
     }
 	
 	// Update is called once per frame
@@ -115,15 +127,15 @@ public class Player : RectGameObject
     }
     #endregion
 
-    public void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(MenuManager.Instance.MainGameRect, value.Get<Vector2>(), Camera.main, out lookAtVect);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(MenuManager.Instance.MainGameRect, context.ReadValue<Vector2>(), Camera.main, out lookAtVect);
 
         lookAtScript.TargetPosition = lookAtVect;
     }
 
     #region Fire Logic
-    public void OnFire(InputValue value)
+    /*public void OnFire(InputValue value)
     {
         isFiring = value.isPressed;
 
@@ -137,7 +149,7 @@ public class Player : RectGameObject
         {
             fireTimer = 0;
         }
-    }
+    }*/
 
     void Fire()
     {
@@ -150,4 +162,32 @@ public class Player : RectGameObject
         NewBullet.Fire(position, rect.rotation);
     }
     #endregion
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnDebug(InputAction.CallbackContext context)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        //isFiring = context.control value.isPressed;
+
+        if (isFiring)
+        {
+            Fire();
+
+            fireTimer = fireCoolDown;
+        }
+        else
+        {
+            fireTimer = 0;
+        }
+    }
 }
