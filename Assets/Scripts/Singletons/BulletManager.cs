@@ -5,28 +5,23 @@ public enum BulletType
     PlayerBullet = 10,
     EnemyBullet = 11
 }
+
 public class BulletManager : Singleton<BulletManager>
 {
     [SerializeField]
+    BulletManagerScriptableObejct data;
+
+    [SerializeField]
     GameObject bulletPrefab;
 
-    [SerializeField]
-    int startingBulletCount;
     int count;
-
-    [SerializeField]
-    Color PlayerBulletColor;
-    [SerializeField]
-    Color EnemyBulletColor;
-
-    const string k_BULLET_NAME = "Bullet_{0:d4}";
 
     // (Optional) Prevent non-singleton constructor use.
     protected BulletManager() { }
 
     private void Awake()
     {
-        for(int i = 0; i < startingBulletCount; ++i)
+        for(int i = 0; i < data.startingBulletCount; ++i)
         {
             CreateBullet();
         }
@@ -39,7 +34,7 @@ public class BulletManager : Singleton<BulletManager>
         newBullet.transform.rotation = Quaternion.identity;
         newBullet.transform.localScale = Vector3.one;
 
-        newBullet.name = string.Format(k_BULLET_NAME, count);
+        newBullet.name = string.Format(data.bulletName, count);
 
         newBullet.SetActive(false);
 
@@ -80,9 +75,9 @@ public class BulletManager : Singleton<BulletManager>
         switch(type)
         {
             case BulletType.EnemyBullet:
-                return EnemyBulletColor;
+                return data.enemyBulletColor;
             case BulletType.PlayerBullet:
-                return PlayerBulletColor;
+                return data.playerBulletColor;
             default:
                 return Color.white;
         }

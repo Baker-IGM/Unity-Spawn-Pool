@@ -500,9 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8249299772027261155, guid: c767ac315ad24ba4aaade53dc54832f5,
     type: 3}
-  startingBulletCount: 100
-  PlayerBulletColor: {r: 0.32866454, g: 1, b: 0, a: 1}
-  EnemyBulletColor: {r: 0.9843137, g: 0.38431373, b: 0.9647059, a: 1}
+  data: {fileID: 11400000, guid: 3824c066ea7c18b42bdb9de13dc45bce, type: 2}
 --- !u!1001 &906273207
 PrefabInstance:
   m_ObjectHideFlags: 0
