@@ -41,6 +41,7 @@ public class BulletManager : Singleton<BulletManager>
         newBullet.transform.SetAsFirstSibling();
 
         ++count;
+        ++StatsManager.Instance.CreatedObjects;
     }
 
     public Bullet GetBullet()
@@ -52,6 +53,9 @@ public class BulletManager : Singleton<BulletManager>
 
         Transform selectedBullet = transform.GetChild(0);
         selectedBullet.SetAsLastSibling();
+
+        ++StatsManager.Instance.SpawnedObjects;
+        ++StatsManager.Instance.ActiveObjects;
 
         return selectedBullet.GetComponent<Bullet>();
     }
@@ -68,6 +72,8 @@ public class BulletManager : Singleton<BulletManager>
         bullet.gameObject.SetActive(false);
 
         bullet.transform.SetAsLastSibling();
+
+        --StatsManager.Instance.ActiveObjects;
     }
 
     public Color GetColor(BulletType type)

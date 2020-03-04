@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 enum Layers
 {
@@ -23,13 +21,10 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+   
+
     // (Optional) Prevent non-singleton constructor use.
     protected GameManager() { }
-
-    private void Awake()
-    {
-        
-    }
 
     public Vector2 GetPlayerLocation()
     {
