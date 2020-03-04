@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
@@ -50,7 +49,7 @@ public class MenuManager : Singleton<MenuManager>, ShootieMcShootie.IUIActions
 
     private void Update()
     {
-        scoreLabel.text = string.Format("Score - {0}", GameManager.Instance.Score);
+        scoreLabel.text = string.Format("Score: {0}", GameManager.Instance.Score);
 
         fpsLabel.text = string.Format(statsData.FPSFormat, StatsManager.Instance.FramesPerSecond);
         fpsLabel.color = StatsManager.Instance.FrameRateLabelColor;

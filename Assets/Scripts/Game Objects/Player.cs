@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(LookAt))]
 public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
