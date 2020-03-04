@@ -2,6 +2,9 @@
 
 public class StatsManager : Singleton<StatsManager>
 {
+    [SerializeField]
+    StatsScriptableObejct data;
+
     #region FPS
     int frameCount;
     float deltaTime, framesPerSecond;
@@ -14,8 +17,24 @@ public class StatsManager : Singleton<StatsManager>
         }
     }
 
-    [SerializeField]
-    float updatesPerSecond;
+    public Color FrameRateLabelColor
+    {
+        get
+        {
+            if(framesPerSecond >= data.NormalFPSLimit)
+            {
+                return data.NormalFPSColor;
+            }
+            else if(framesPerSecond >= data.WarningFPSLimit)
+            {
+                return data.NormalFPSColor;
+            }
+            else
+            {
+                return data.CriticalFPSColor;
+            }
+        }
+    }
     #endregion
 
     int createdObjects, spawnedObjects, activeObjects;
@@ -70,12 +89,12 @@ public class StatsManager : Singleton<StatsManager>
         ++frameCount;
         deltaTime += Time.deltaTime;
 
-        if (deltaTime > 1f / updatesPerSecond)
+        if (deltaTime > 1f / data.UpdatesPerSecond)
         {
             framesPerSecond = frameCount / deltaTime;
 
             frameCount = 0;
-            deltaTime -= 1f / updatesPerSecond;
+            deltaTime -= 1f / data.UpdatesPerSecond;
         }
         #endregion
     }

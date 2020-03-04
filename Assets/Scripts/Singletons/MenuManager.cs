@@ -37,6 +37,9 @@ public class MenuManager : Singleton<MenuManager>, ShootieMcShootie.IUIActions
     [SerializeField]
     TMP_Text activeLabel;
 
+    [SerializeField]
+    StatsScriptableObejct statsData;
+
     // (Optional) Prevent non-singleton constructor use.
     protected MenuManager() { }
 
@@ -47,17 +50,18 @@ public class MenuManager : Singleton<MenuManager>, ShootieMcShootie.IUIActions
 
     private void Update()
     {
-        scoreLabel.text = GameManager.Instance.Score.ToString();
+        scoreLabel.text = string.Format("Score - {0}", GameManager.Instance.Score);
 
-        fpsLabel.text = string.Format("{0:0.} FPS", StatsManager.Instance.FramesPerSecond);
+        fpsLabel.text = string.Format(statsData.FPSFormat, StatsManager.Instance.FramesPerSecond);
+        fpsLabel.color = StatsManager.Instance.FrameRateLabelColor;
 
-        gameTimeLabel.text = string.Format("Total Game Time: {0:#.0}", Time.time);
+        gameTimeLabel.text = string.Format(statsData.GameTimeFormat, Time.time);
 
-        createdLabel.text = string.Format("Objects Created: {0}", StatsManager.Instance.CreatedObjects);
+        createdLabel.text = string.Format(statsData.CreatedFormat, StatsManager.Instance.CreatedObjects);
 
-        spawnedLabel.text = string.Format("Spawned Created: {0}", StatsManager.Instance.SpawnedObjects);
+        spawnedLabel.text = string.Format(statsData.SpawnedFormat, StatsManager.Instance.SpawnedObjects);
 
-        activeLabel.text = string.Format("Active Objects: {0}", StatsManager.Instance.ActiveObjects);
+        activeLabel.text = string.Format(statsData.ActiveFormat, StatsManager.Instance.ActiveObjects);
     }
 
     public void OnDebug(InputAction.CallbackContext context)

@@ -415,6 +415,7 @@ MonoBehaviour:
   createdLabel: {fileID: 1772279446}
   spawnedLabel: {fileID: 957033865}
   activeLabel: {fileID: 623846185}
+  statsData: {fileID: 11400000, guid: 4d630cf087dcef949873aff31e2e943d, type: 2}
 --- !u!114 &95185926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b380c8cb6acfb6488405dff3a9a9092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 4d630cf087dcef949873aff31e2e943d, type: 2}
   updatesPerSecond: 6
 --- !u!1 &259812803
 GameObject:
