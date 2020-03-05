@@ -34,7 +34,7 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 
         lookAtScript = GetComponent<LookAt>();
 
-        InputManager.Instance.SetCallbacksForPlayer(this);
+        InputManager.Instance.SetCallbacks(this);
     }
 	
 	// Update is called once per frame
