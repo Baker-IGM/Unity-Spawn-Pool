@@ -36,10 +36,12 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 
         InputManager.Instance.SetCallbacks(this);
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    protected override void Update()
     {
+        base.Update();
+
         #region Firing
         //  Check if fire button is held down
         if(isFiring)
@@ -83,8 +85,6 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         Vector2 newPos = ClampMoveToBounds(rect.anchoredPosition + delta);
 
         rect.anchoredPosition = newPos;
-
-        position = rect.anchoredPosition;
     }
 
     Vector2 ClampMoveToBounds(Vector2 pos)

@@ -19,4 +19,9 @@ public class RectGameObject : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
     }
+
+    protected virtual void Update()
+    {
+        position = rect.anchoredPosition;
+    }
 }

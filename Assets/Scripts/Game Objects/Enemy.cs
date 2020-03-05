@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(LookAt))]
+[RequireComponent (typeof(LookAt))]
 public class Enemy : RectGameObject
 {
     LookAt lookAtScript;
+
+    MoveTowards moveTowards;
+
+    [SerializeField]
+    float speed;
 
     #region Firing vars
     bool isFiring = false;
@@ -21,16 +26,22 @@ public class Enemy : RectGameObject
         base.Awake();
 
         lookAtScript = GetComponent<LookAt>();
+
+        moveTowards = GetComponent<MoveTowards>();
     }
 
     private void OnEnable()
     {
         fireTimer = fireCoolDown;
+
+        moveTowards.SetTarget(-rect.anchoredPosition.normalized, speed);
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         lookAtScript.TargetPosition = GameManager.Instance.GetPlayerLocation();
 
         #region Fire

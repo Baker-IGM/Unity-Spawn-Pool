@@ -25,8 +25,10 @@ public class Bullet : RectGameObject
     }
 
     // Update is called once per frame
-    void Update ()
+    protected override void Update()
     {
+        base.Update();
+
         if (!IsWithinBounds(rect.anchoredPosition))
         {
             if (!BulletManager.IsShuttingDown())
