@@ -30,11 +30,46 @@ public class Enemy : RectGameObject
         moveTowards = GetComponent<MoveTowards>();
     }
 
-    private void OnEnable()
+    public void Spawn(int side)
     {
+        switch (side)
+        {
+            //          Top
+            case 0:
+                position.y = -(MenuManager.Instance.MainGameRect.rect.height / 2f) - (rect.rect.height / 2f);
+
+                position.x = Random.Range(-MenuManager.Instance.MainGameRect.rect.width / 2f, MenuManager.Instance.MainGameRect.rect.width / 2f);
+                break;
+            //          Bottom
+            case 1:
+                position.y = (MenuManager.Instance.MainGameRect.rect.height / 2f) + (rect.rect.height / 2f);
+
+                position.x = Random.Range(-MenuManager.Instance.MainGameRect.rect.width / 2f, MenuManager.Instance.MainGameRect.rect.width / 2f);
+                break;
+            //          Left
+            case 2:
+                position.x = -(MenuManager.Instance.MainGameRect.rect.width / 2f) - (rect.rect.width / 2f);
+
+                position.y = Random.Range(-MenuManager.Instance.MainGameRect.rect.height / 2f, MenuManager.Instance.MainGameRect.rect.height / 2f);
+                break;
+            //          Right
+            default:
+                position.x = (MenuManager.Instance.MainGameRect.rect.width / 2f) + (rect.rect.width / 2f);
+
+                position.y = Random.Range(-MenuManager.Instance.MainGameRect.rect.height / 2f, MenuManager.Instance.MainGameRect.rect.height / 2f);
+                break;
+        }
+
+        rect.anchoredPosition3D = new Vector3(position.x, position.y, 0);
+
         fireTimer = fireCoolDown;
 
-        moveTowards.SetTarget(-rect.anchoredPosition.normalized, speed);
+        if (moveTowards != null)
+        {
+            moveTowards.SetTarget(-rect.anchoredPosition.normalized, speed);
+        }
+
+        gameObject.SetActive(true);
     }
 
     // Update is called once per frame

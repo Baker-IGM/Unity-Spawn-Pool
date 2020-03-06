@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83813c969ed091b4a97c6d3b8e017237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCoolDown: 0.5
+  speed: 2
+  fireCoolDown: 1
 --- !u!114 &8162830156174460569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +131,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761c42dd8cd3296478c2963be5a75373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDir: {x: 0, y: 0}
