@@ -117,8 +117,11 @@ public class Enemy : RectGameObject
         CleanUp();
     }
 
-    void CleanUp()
+    //public override void CleanUp()
+    public override void CleanUp()
     {
+        base.CleanUp();
+    
         if (!BulletManager.IsShuttingDown())
         {
             EnemyManager.Instance.ReturnEnemy(this);

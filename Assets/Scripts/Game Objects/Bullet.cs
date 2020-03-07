@@ -29,7 +29,7 @@ public class Bullet : RectGameObject
     {
         base.Update();
 
-        if (!IsWithinBounds(rect.anchoredPosition))
+        if (!IsVisible(rect.anchoredPosition))
         {
             CleanUp();
         }
@@ -55,7 +55,7 @@ public class Bullet : RectGameObject
         CleanUp();
     }
 
-    bool IsWithinBounds(Vector2 pos)
+    bool IsVisible(Vector2 pos)
     {
         if (pos.x - rect.rect.width / 2f > MenuManager.Instance.MainGameRect.rect.width / 2f ||
             pos.x + rect.rect.width / 2f < MenuManager.Instance.MainGameRect.rect.width / -2f ||
@@ -78,8 +78,10 @@ public class Bullet : RectGameObject
         CleanUp();
     }
 
-    void CleanUp()
+    public override void CleanUp()
     {
+        base.CleanUp();
+
         if (!BulletManager.IsShuttingDown())
         {
             BulletManager.Instance.ReturnBullet(this);
