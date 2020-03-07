@@ -49,19 +49,20 @@ public class EnemyManager : Singleton<EnemyManager>
         selectedEnemy.SetAsLastSibling();
 
         ++StatsManager.Instance.SpawnedObjects;
-        ++StatsManager.Instance.ActiveObjects;
 
         return selectedEnemy.GetComponent<Enemy>();
     }
 
     public void ReturnEnemy(Enemy enemy)
     {
+#if DESTROY
+        Destroy(enemy.gameObject);
+#else
         enemy.transform.SetParent(transform, false);
 
         enemy.gameObject.SetActive(false);
 
         enemy.transform.SetAsLastSibling();
-
-        --StatsManager.Instance.ActiveObjects;
+#endif
     }
 }

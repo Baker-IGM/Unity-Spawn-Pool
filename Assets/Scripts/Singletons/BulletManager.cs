@@ -11,10 +11,7 @@ public class BulletManager : Singleton<BulletManager>
     [SerializeField]
     BulletManagerScriptableObejct data;
 
-    [SerializeField]
-    GameObject bulletPrefab;
-
-    int count;
+    int createdCount;
 
     // (Optional) Prevent non-singleton constructor use.
     protected BulletManager() { }
@@ -29,18 +26,18 @@ public class BulletManager : Singleton<BulletManager>
 
     void CreateBullet()
     {
-        GameObject newBullet = Instantiate(bulletPrefab, transform, false);
-        //newBullet.transform.localPosition = Vector3.zero;
+        GameObject newBullet = Instantiate(data.BulletPrefab, transform, false);
+
         newBullet.transform.rotation = Quaternion.identity;
         newBullet.transform.localScale = Vector3.one;
 
-        newBullet.name = string.Format(data.bulletName, count);
+        newBullet.name = string.Format(data.bulletName, createdCount);
 
         newBullet.SetActive(false);
 
         newBullet.transform.SetAsFirstSibling();
 
-        ++count;
+        ++createdCount;
         ++StatsManager.Instance.CreatedObjects;
     }
 
@@ -55,13 +52,15 @@ public class BulletManager : Singleton<BulletManager>
         selectedBullet.SetAsLastSibling();
 
         ++StatsManager.Instance.SpawnedObjects;
-        ++StatsManager.Instance.ActiveObjects;
 
         return selectedBullet.GetComponent<Bullet>();
     }
 
     public void ReturnBullet(Bullet bullet)
     {
+#if DESTROY
+        Destroy(bullet.gameObject);
+#else
         //  Set to default layer
         bullet.gameObject.layer = 0;
 
@@ -72,8 +71,7 @@ public class BulletManager : Singleton<BulletManager>
         bullet.gameObject.SetActive(false);
 
         bullet.transform.SetAsLastSibling();
-
-        --StatsManager.Instance.ActiveObjects;
+#endif
     }
 
     public Color GetColor(BulletType type)

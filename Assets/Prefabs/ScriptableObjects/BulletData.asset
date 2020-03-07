@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b389da2a34ffd6e42a220cd92353398c, type: 3}
   m_Name: BulletData
   m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 8249299772027261155, guid: c767ac315ad24ba4aaade53dc54832f5,
+    type: 3}
   startingBulletCount: 100
   bulletName: Bullet_{0:d4}
   playerBulletColor: {r: 0.32866454, g: 1, b: 0, a: 1}

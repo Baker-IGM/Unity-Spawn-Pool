@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class StatsManager : Singleton<StatsManager>
 {
@@ -97,5 +97,7 @@ public class StatsManager : Singleton<StatsManager>
             deltaTime -= 1f / data.UpdatesPerSecond;
         }
         #endregion
+
+        activeObjects = MenuManager.Instance.MainGameRect.childCount - 1;
     }
 }
