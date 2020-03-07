@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  fireCoolDown: 1
+  fireCoolDown: 0.2
 --- !u!114 &8162830156174460569
 MonoBehaviour:
   m_ObjectHideFlags: 0
