@@ -56,9 +56,6 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void ReturnEnemy(Enemy enemy)
     {
-        //  Set to default layer
-        enemy.gameObject.layer = 0;
-
         enemy.transform.SetParent(transform, false);
 
         enemy.gameObject.SetActive(false);

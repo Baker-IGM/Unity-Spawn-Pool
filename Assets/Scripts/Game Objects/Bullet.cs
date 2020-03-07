@@ -31,10 +31,7 @@ public class Bullet : RectGameObject
 
         if (!IsWithinBounds(rect.anchoredPosition))
         {
-            if (!BulletManager.IsShuttingDown())
-            {
-                BulletManager.Instance.ReturnBullet(this);
-            }
+            CleanUp();
         }
 	}
 
@@ -53,16 +50,9 @@ public class Bullet : RectGameObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //  Check what layer the bullet is
-        switch(gameObject.layer)
-        {
-            case (int)BulletType.EnemyBullet:
-                GameManager.Instance.ResetScore();
-                break;
-            case (int)BulletType.PlayerBullet:
-                GameManager.Instance.AddPoints(1);
-                break;
-        }
+        collision.GetComponent<RectGameObject>().OnHit(gameObject.layer);
+
+        CleanUp();
     }
 
     bool IsWithinBounds(Vector2 pos)
@@ -81,5 +71,18 @@ public class Bullet : RectGameObject
     public void SetColor(Color color)
     {
         sprite.color = color;
+    }
+
+    public override void OnHit(int otherLayer)
+    {
+        CleanUp();
+    }
+
+    void CleanUp()
+    {
+        if (!BulletManager.IsShuttingDown())
+        {
+            BulletManager.Instance.ReturnBullet(this);
+        }
     }
 }

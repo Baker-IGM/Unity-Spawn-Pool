@@ -106,4 +106,22 @@ public class Enemy : RectGameObject
 
         NewBullet.Fire(position, rect.rotation);
     }
+
+    public override void OnHit(int otherLayer)
+    {
+        if((Layers)otherLayer != Layers.Player)
+        {
+            GameManager.Instance.AddPoints(1);
+        }
+
+        CleanUp();
+    }
+
+    void CleanUp()
+    {
+        if (!BulletManager.IsShuttingDown())
+        {
+            EnemyManager.Instance.ReturnEnemy(this);
+        }
+    }
 }

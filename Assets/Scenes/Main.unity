@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f141c6659d0e23041bb3a0302f0e1488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEnemyCount: 10
+  startEnemyCount: 1
   enemyPrefab: {fileID: 6022014914918705544, guid: 274e86b58052a0646968f1f5c79b5c8d,
     type: 3}
 --- !u!114 &613929224
@@ -1982,61 +1982,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 71061679}
     m_Modifications:
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Actions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Bindings.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Id
-      value: 25a070e6-67a7-4374-9711-2caed94c82b6
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: fireAction.m_Id
-      value: 7d7a5c73-fc44-4ef8-a844-718c27ef3162
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Name
-      value: Player Actions
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: fireAction.m_Name
-      value: Fire
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Actions.Array.data[0].m_Name
-      value: New action
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Actions.Array.data[0].m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Actions.Array.data[0].m_Id
-      value: 755e03ee-c6e2-4791-81fc-11d66ef192d0
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Bindings.Array.data[0].m_Id
-      value: 27754cd9-4c66-47c1-8d24-e2ca0e4b4c64
-      objectReference: {fileID: 0}
-    - target: {fileID: 749250151834923536, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: playerActions.m_Bindings.Array.data[0].m_Action
-      value: New action
-      objectReference: {fileID: 0}
     - target: {fileID: 749250151834923539, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2146,11 +2091,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8841470011214395405, guid: 9b93bd781f1cb0f4ea944260bc58c88f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b93bd781f1cb0f4ea944260bc58c88f, type: 3}
