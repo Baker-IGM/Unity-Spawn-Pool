@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StatsManager : Singleton<StatsManager>
 {
@@ -27,7 +27,7 @@ public class StatsManager : Singleton<StatsManager>
             }
             else if(framesPerSecond >= data.WarningFPSLimit)
             {
-                return data.NormalFPSColor;
+                return data.WarningFPSColor;
             }
             else
             {
