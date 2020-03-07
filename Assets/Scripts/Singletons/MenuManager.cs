@@ -44,7 +44,7 @@ public class MenuManager : Singleton<MenuManager>, ShootieMcShootie.IUIActions
 
     private void Awake()
     {
-        InputManager.Instance.SetCallbacksForUI(this);
+        InputManager.Instance.SetCallbacks(this);
     }
 
     private void Update()

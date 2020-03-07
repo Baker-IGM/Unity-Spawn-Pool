@@ -21,17 +21,28 @@ public class InputManager : Singleton<InputManager>
         
     }
 
-    public void SetCallbacksForPlayer(ShootieMcShootie.IPlayerActions instance)
+    public bool SetCallbacks(Object instance)
     {
-        controls.Player.SetCallbacks(instance);
+        bool foundInterface = false;
 
-        controls.Player.Enable();
-    }
+        if (instance is ShootieMcShootie.IPlayerActions)
+        {
+            controls.Player.SetCallbacks((ShootieMcShootie.IPlayerActions)instance);
 
-    public void SetCallbacksForUI(ShootieMcShootie.IUIActions instance)
-    {
-        controls.UI.SetCallbacks(instance);
+            controls.Player.Enable();
 
-        controls.UI.Enable();
+            foundInterface = true;
+        }
+
+        if (instance is ShootieMcShootie.IUIActions)
+        {
+            controls.UI.SetCallbacks((ShootieMcShootie.IUIActions)instance);
+
+            controls.UI.Enable();
+
+            foundInterface = true;
+        }
+
+        return foundInterface;
     }
 }

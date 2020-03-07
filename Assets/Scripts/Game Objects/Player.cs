@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,10 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
     Vector2 moveDelta;
     #endregion
 
+    [SerializeField]
+    ContactFilter2D contactFilter;
+    List<Collider2D> hitList = new List<Collider2D>();
+
     // Use this for initialization
     protected override void Awake()
     {
@@ -34,12 +39,14 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
 
         lookAtScript = GetComponent<LookAt>();
 
-        InputManager.Instance.SetCallbacksForPlayer(this);
+        InputManager.Instance.SetCallbacks(this);
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    protected override void Update()
     {
+        base.Update();
+
         #region Firing
         //  Check if fire button is held down
         if(isFiring)
@@ -65,6 +72,20 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         //      Player movement
         //
         MovePlayer(moveDelta);
+
+        #region Check if hit Enemies
+        collider.OverlapCollider(contactFilter, hitList);
+
+        if(hitList.Count > 0)
+        {
+            GameManager.Instance.ResetScore();
+
+            foreach (Collider2D hitCollider in hitList)
+            {
+                hitCollider.GetComponent<Enemy>().OnHit((int)Layers.Player);
+            }
+        }
+        #endregion
     }
 
     #region Movment Logic
@@ -83,8 +104,6 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         Vector2 newPos = ClampMoveToBounds(rect.anchoredPosition + delta);
 
         rect.anchoredPosition = newPos;
-
-        position = rect.anchoredPosition;
     }
 
     Vector2 ClampMoveToBounds(Vector2 pos)
@@ -152,4 +171,9 @@ public class Player : RectGameObject, ShootieMcShootie.IPlayerActions
         NewBullet.Fire(position, rect.rotation);
     }
     #endregion
+
+    public override void OnHit(int otherLayer)
+    {
+        GameManager.Instance.ResetScore();
+    }
 }

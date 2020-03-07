@@ -25,14 +25,13 @@ public class Bullet : RectGameObject
     }
 
     // Update is called once per frame
-    void Update ()
+    protected override void Update()
     {
-        if (!IsWithinBounds(rect.anchoredPosition))
+        base.Update();
+
+        if (!IsVisible(rect.anchoredPosition))
         {
-            if (!BulletManager.IsShuttingDown())
-            {
-                BulletManager.Instance.ReturnBullet(this);
-            }
+            CleanUp();
         }
 	}
 
@@ -51,19 +50,12 @@ public class Bullet : RectGameObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //  Check what layer the bullet is
-        switch(gameObject.layer)
-        {
-            case (int)BulletType.EnemyBullet:
-                GameManager.Instance.ResetScore();
-                break;
-            case (int)BulletType.PlayerBullet:
-                GameManager.Instance.AddPoints(1);
-                break;
-        }
+        collision.GetComponent<RectGameObject>().OnHit(gameObject.layer);
+
+        CleanUp();
     }
 
-    bool IsWithinBounds(Vector2 pos)
+    bool IsVisible(Vector2 pos)
     {
         if (pos.x - rect.rect.width / 2f > MenuManager.Instance.MainGameRect.rect.width / 2f ||
             pos.x + rect.rect.width / 2f < MenuManager.Instance.MainGameRect.rect.width / -2f ||
@@ -79,5 +71,20 @@ public class Bullet : RectGameObject
     public void SetColor(Color color)
     {
         sprite.color = color;
+    }
+
+    public override void OnHit(int otherLayer)
+    {
+        CleanUp();
+    }
+
+    public override void CleanUp()
+    {
+        base.CleanUp();
+
+        if (!BulletManager.IsShuttingDown())
+        {
+            BulletManager.Instance.ReturnBullet(this);
+        }
     }
 }
